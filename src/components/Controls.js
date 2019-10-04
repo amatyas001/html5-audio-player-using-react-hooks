@@ -1,9 +1,12 @@
-import React, { Fragment } from 'react'
+import React, { useContext, Fragment } from 'react'
+import { Store } from '../store'
+import Playback from '../utils/player'
 
 import { PlayerControls } from '../templates/index'
 
 import Songs from './Songs'
 
+import loadingSvg from '../assets/svg/loading.svg'
 import playSvg from '../assets/svg/play.svg'
 import pauseSvg from '../assets/svg/pause.svg'
 import prevSvg from '../assets/svg/prev.svg'
@@ -14,6 +17,9 @@ import shuffleSvg from '../assets/svg/shuffle.svg'
 
 const Controls = (props) => {
   const player = document.getElementById("audioPlayer")
+  const { state } = useContext(Store)
+  const { selectedPlaylist, playerReady, songPlaying } = state
+  const { playerPlaySong } = Playback()
 
   const controlButtonSyles = (isPlay) => {
     return {
@@ -33,19 +39,40 @@ const Controls = (props) => {
               alt="Previous song"
               style={controlButtonSyles()} />
           </button>
-          <button type="button" className="btn">
-            <img
-              src={ player && player.paused ? playSvg : pauseSvg }
-              alt={ player && player.paused ? "Play song" : "Pause song" }
-              style={controlButtonSyles(true)} />
-          </button>
+          {(songPlaying || songPlaying === null) && selectedPlaylist && selectedPlaylist.map((song, index) => {
+            return (
+              <Fragment key={index}>
+                {index === 0 &&
+                  <button
+                    type="button" 
+                    className="btn"
+                    onClick={() => playerPlaySong(song, index)}>
+                    {!playerReady &&
+                      <img
+                        src={loadingSvg}
+                        alt="Loading..."
+                        style={controlButtonSyles(true)} />
+                    }
+                    {playerReady &&
+                      <img
+                        src={ player && player.paused ? playSvg : pauseSvg }
+                        alt={ player && player.paused ? "Play song" : "Pause song" }
+                        style={controlButtonSyles(true)} />
+                    }
+                  </button>
+                }
+              </Fragment>
+            )
+          })}
           <button type="button" className="btn">
             <img
               src={nextSvg}
               alt="Next song"
               style={controlButtonSyles()} />
           </button>
-          <button type="button" className="btn">
+          <button
+            type="button"
+            className="btn">
             <img
               src={ player && player.muted ? muteSvg : volumeSvg }
               alt={ player && player.muted ? "Mute volume" : "Unmute volume" }
@@ -61,9 +88,9 @@ const Controls = (props) => {
 
         <div className="item">
           <p>
-            Song One
+            {songPlaying && songPlaying.title}
             <br />
-            <small>Artist One</small>
+            <small>{songPlaying && songPlaying.artist}</small>
           </p>
         </div>
       </PlayerControls>

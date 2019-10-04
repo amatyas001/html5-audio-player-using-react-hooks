@@ -19,7 +19,7 @@ function reducer(state, action) {
     case "SELECTED_PLAYLIST":
       return { ...state, selectedPlaylist: action.payload }
     case "PLAYER_READY":
-      return { ...state, songPlaying: action.payload }
+      return { ...state, playerReady: action.payload }
     case "SONG_PLAYING":
       return { ...state, songPlaying: action.payload }
     case "SONG_PLAYING_PROGRESS":

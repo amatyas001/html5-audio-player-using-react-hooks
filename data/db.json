@@ -1,28 +1,34 @@
 {
   "posts": [
     {
-      "id": 1,
-      "source": "https://via.placeholder.com/500/262626/fff",
-      "title": "Song One",
-      "artist": "Artist One"
+      "source": "https://html5-audio-player-using-react-hooks.s3-us-west-2.amazonaws.com/01.+Thunderstruck.mp3",
+      "title": "Thunderstruck",
+      "artist": "AC/DC",
+      "duration": "05:04"
     },
     {
-      "id": 2,
-      "source": "https://via.placeholder.com/500/262626/fff",
-      "title": "Song Two",
-      "artist": "Artist Two"
+      "source": "https://html5-audio-player-using-react-hooks.s3-us-west-2.amazonaws.com/02.+Mony+Mony.mp3",
+      "title": "Mony Mony",
+      "artist": "Billy Idol",
+      "duration": "05:01"
     },
     {
-      "id": 3,
-      "source": "https://via.placeholder.com/500/262626/fff",
-      "title": "Song Three",
-      "artist": "Artist Three"
+      "source": "https://html5-audio-player-using-react-hooks.s3-us-west-2.amazonaws.com/02.+Party+Hard.mp3",
+      "title": "Party Hard",
+      "artist": "Andrew WK",
+      "duration": "03:06"
     },
     {
-      "id": 4,
-      "source": "https://via.placeholder.com/500/262626/fff",
-      "title": "Song Four",
-      "artist": "Artist Four"
+      "source": "https://html5-audio-player-using-react-hooks.s3-us-west-2.amazonaws.com/02.+Song+2.mp3",
+      "title": "Song 2",
+      "artist": "Blur",
+      "duration": "02:01"
+    },
+    {
+      "source": "https://html5-audio-player-using-react-hooks.s3-us-west-2.amazonaws.com/10.+Crocodile+Rock.mp3",
+      "title": "Crocodile Rock",
+      "artist": "Elton John",
+      "duration": "03:56"
     }
   ]
 }

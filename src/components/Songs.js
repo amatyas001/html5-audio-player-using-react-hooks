@@ -1,5 +1,6 @@
 import React, { useContext, useState, Fragment } from 'react'
 import { Store } from '../store'
+import Playback from '../utils/player'
 
 import barsSvg from '../assets/svg/bars.svg'
 import addSvg from '../assets/svg/add.svg'
@@ -9,6 +10,7 @@ const Songs = (props) => {
   const { state } = useContext(Store)
   const [ playlistSongs, playlistSongsToggle ] = useState(false)
   const { selectedPlaylist } = state
+  const { playerPlaySong } = Playback()
 
   const playlistToggleStyles = () => {
     return {
@@ -53,7 +55,8 @@ const Songs = (props) => {
             return (
               <div
                 key={index}
-                className="dropdown-item">
+                className="dropdown-item"
+                onClick={() => playerPlaySong(song, index)}>
                 <p>{song.title}</p>
                 <p style={playlistSongOptionStyle()}>
                   <img
@@ -64,7 +67,7 @@ const Songs = (props) => {
                     src={repeatSvg}
                     alt="Repeat song"
                     style={playlistSongOptionControlStyle(true)} /> 
-                  03:14
+                  {song.duration}
                 </p>
                 <small>{song.artist}</small>
               </div>

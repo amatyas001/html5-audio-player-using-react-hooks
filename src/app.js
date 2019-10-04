@@ -52,6 +52,8 @@ export default function App(props) {
 
                 <p>Run the following commands to run the project locally.</p>
 
+                <p><em>Please note all songs used in this example remain the property their respective owners</em></p>
+
                 <pre>
                   <p>git clone https://github.com/bronsondunbar/audio-player-using-react-hooks</p>
 
