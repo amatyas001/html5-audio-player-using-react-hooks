@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css?family=Anton&display=swap');
+
+body {
+
+	position: relative;
+	background: #dddddd;
+	padding: 60px 0 0 0;
+	transition: all 0.3s;
+
+}
+
+h1, h2, h3, h4, h5 {
+
+	font-family: 'Anton', sans-serif;
+
+}
+
+h1 {
+
+	font-size: 4em;
+
+}
+
+a {
+
+	color: #3ba30d;
+	transition: all 0.3s;
+
+}
+
+a:hover, a:focus {
+
+	color: #262626;
+	text-decoration: none;
+
+}
+
+/* Create templates for below */
+
+.dropdown-menu {
+
+	min-width: 25rem;
+
+}
+
+.dropdown-item {
+
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: .45rem 1.5rem;
+	cursor: pointer;
+
+}
+
+.dropdown-item p {
+
+	flex: 1;
+
+}
+
+.dropdown-item i {
+
+	padding: 0 5px 0 0;
+
+}
+
+.dropdown-item p:nth-child(2) {
+
+	text-align: right !important;
+
+}
+
+.dropdown-item p,
+.dropdown-item small {
+
+	width: 100%;
+	text-align: left !important;
+	margin: 0;
+
+}
+
+.dropdown-item .dropdown-toggle {
+
+	/*margin: 0 !important;
+	padding: 0 0 0 5px;*/
+
+}

@@ -1,0 +1,28 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "source": "https://via.placeholder.com/500/262626/fff",
+      "title": "Song One",
+      "artist": "Artist One"
+    },
+    {
+      "id": 2,
+      "source": "https://via.placeholder.com/500/262626/fff",
+      "title": "Song Two",
+      "artist": "Artist Two"
+    },
+    {
+      "id": 3,
+      "source": "https://via.placeholder.com/500/262626/fff",
+      "title": "Song Three",
+      "artist": "Artist Three"
+    },
+    {
+      "id": 4,
+      "source": "https://via.placeholder.com/500/262626/fff",
+      "title": "Song Four",
+      "artist": "Artist Four"
+    }
+  ]
+}
