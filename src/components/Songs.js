@@ -2,14 +2,18 @@ import React, { useContext, useState, Fragment } from 'react'
 import { Store } from '../store'
 import Playback from '../utils/player'
 
+import loadingSvg from '../assets/svg/loading.svg'
 import barsSvg from '../assets/svg/bars.svg'
+import playAltSvg from '../assets/svg/play.alt.svg'
+import pauseAltSvg from '../assets/svg/pause.alt.svg'
 import addSvg from '../assets/svg/add.svg'
 import repeatSvg from '../assets/svg/repeat.svg'
 
 const Songs = (props) => {
+  const player = document.getElementById("audioPlayer")
   const { state } = useContext(Store)
   const [ playlistSongs, playlistSongsToggle ] = useState(false)
-  const { selectedPlaylist } = state
+  const { selectedPlaylist, playerReady, songPlaying } = state
   const { playerPlaySong } = Playback()
 
   const playlistToggleStyles = () => {
@@ -18,10 +22,17 @@ const Songs = (props) => {
     }
   }
 
-  const playlistSongOptionStyle = () => {
+  const playlistSongStyles = (song) => {
+    return {
+      color: JSON.stringify(songPlaying) === JSON.stringify(song) ? '#3ba30d' : '#262626'
+    }
+  }
+
+  const playlistSongOptionStyle = (song) => {
     return {
       display: 'flex',
-      justifyContent: 'flex-end'
+      justifyContent: 'flex-end',
+      color: JSON.stringify(songPlaying) === JSON.stringify(song) ? '#3ba30d' : '#262626'
     }
   }
 
@@ -57,8 +68,22 @@ const Songs = (props) => {
                 key={index}
                 className="dropdown-item"
                 onClick={() => playerPlaySong(song, index)}>
-                <p>{song.title}</p>
-                <p style={playlistSongOptionStyle()}>
+                <p style={playlistSongStyles(song)}>
+                  {!playerReady &&
+                    <img
+                      src={loadingSvg}
+                      alt="Loading..."
+                      style={{ width: '15px', marginRight: '10px', filter: 'invert(1)' }} />
+                  }
+                  {playerReady &&
+                    <img
+                      src={ player && player.paused ? playAltSvg : JSON.stringify(songPlaying) === JSON.stringify(song) ? pauseAltSvg : playAltSvg }
+                      alt={ player && player.paused ? "Play song" : "Pause song" }
+                      style={{ width: '10px', marginRight: '10px' }} />
+                  }
+                  {song.title}
+                </p>
+                <p style={playlistSongOptionStyle(song)}>
                   <img
                     src={addSvg}
                     alt="Add song to queue"
@@ -69,7 +94,9 @@ const Songs = (props) => {
                     style={playlistSongOptionControlStyle(true)} /> 
                   {song.duration}
                 </p>
-                <small>{song.artist}</small>
+                <small style={{ marginLeft: '20px', color: JSON.stringify(songPlaying) === JSON.stringify(song) ? '#3ba30d' : '#262626' }}>
+                  {song.artist}
+                </small>
               </div>
             )
           })}

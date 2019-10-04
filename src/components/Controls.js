@@ -39,10 +39,31 @@ const Controls = (props) => {
               alt="Previous song"
               style={controlButtonSyles()} />
           </button>
-          {(songPlaying || songPlaying === null) && selectedPlaylist && selectedPlaylist.map((song, index) => {
+          
+          {selectedPlaylist && selectedPlaylist.map((song, index) => {
             return (
               <Fragment key={index}>
-                {index === 0 &&
+                {(JSON.stringify(songPlaying) === JSON.stringify(song)) &&
+                  <button
+                    type="button" 
+                    className="btn"
+                    onClick={() => playerPlaySong(song, index)}>
+                    {!playerReady &&
+                      <img
+                        src={loadingSvg}
+                        alt="Loading..."
+                        style={controlButtonSyles(true)} />
+                    }
+                    {playerReady &&
+                      <img
+                        src={ player && player.paused ? playSvg : pauseSvg }
+                        alt={ player && player.paused ? "Play song" : "Pause song" }
+                        style={controlButtonSyles(true)} />
+                    }
+                  </button>
+                }
+
+                {(JSON.stringify(songPlaying) !== JSON.stringify(song) && songPlaying === null && index === 0) &&
                   <button
                     type="button" 
                     className="btn"
@@ -64,6 +85,7 @@ const Controls = (props) => {
               </Fragment>
             )
           })}
+
           <button type="button" className="btn">
             <img
               src={nextSvg}
