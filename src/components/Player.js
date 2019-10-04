@@ -26,7 +26,6 @@ const Player = (props) => {
 	return (
   	<Fragment>
   		<audio
-        controls
   			id="audioPlayer"
   			onCanPlay={() => playerReadyToPlay()}
   			onTimeUpdate={() => playerSongProgress()}
