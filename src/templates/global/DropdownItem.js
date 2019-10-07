@@ -16,15 +16,17 @@ const DropdownItem = styled.div`
 		background-color: ${(props) => props.selectedTheme === 'default' ? '#dedede;' : '#262626;'}
 	}
 
-	p, small {
+	p {
 		flex: 1;
 		text-align: left !important;
 		margin: 0;
+		color: ${(props) => props.selectedTheme === 'default' ? '#262626 !important;' : '#ffffff !important;'}
 	}
 
 	small {
 		flex: 1;
 		min-width: 100%;
+		color: ${(props) => props.selectedTheme === 'default' ? '#262626 !important;' : '#ffffff !important;'}
 
 	}
 
