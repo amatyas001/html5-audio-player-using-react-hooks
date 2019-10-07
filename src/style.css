@@ -37,13 +37,7 @@ a:hover, a:focus {
 
 /* Create templates for below */
 
-.dropdown-menu {
-
-	min-width: 25rem;
-
-}
-
-.dropdown-item {
+/*.dropdown-item {
 
 	display: flex;
 	flex-wrap: wrap;
@@ -65,11 +59,6 @@ a:hover, a:focus {
 
 }
 
-.dropdown-item i {
-
-	padding: 0 5px 0 0;
-
-}
 
 .dropdown-item p:nth-child(2) {
 
@@ -84,11 +73,5 @@ a:hover, a:focus {
 	text-align: left !important;
 	margin: 0;
 
-}
+}*/
 
-.dropdown-item .dropdown-toggle {
-
-	/*margin: 0 !important;
-	padding: 0 0 0 5px;*/
-
-}

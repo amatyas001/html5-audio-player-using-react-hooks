@@ -3,7 +3,7 @@ import { Link } from '@reach/router'
 
 import { Store } from './store'
 
-import { Body, Navbar, Header, Card } from './templates/index'
+import { Body, Navbar, Header, Card, Dropdown, DropdownItem } from './templates/index'
 
 import swatchSvg from './assets/svg/swatch.svg'
 import swatchAltSvg from './assets/svg/swatch.alt.svg'
@@ -55,20 +55,23 @@ export default function App(props) {
                       alt="Change theme"
                       style={{ width: '20px' }} />
                   </button>
-                  <div className={`dropdown-menu ${themes ? 'show' : ''}`}>
-                    <div
-                      className="dropdown-item"
-                      onClick={updateTheme}
-                      style={{ color: selectedTheme === 'default' ? '#3ba30d' : '#262626' }}>
+                  <Dropdown
+                    selectedTheme={selectedTheme}
+                    navBar={true}
+                    className={`dropdown-menu ${themes ? 'show' : ''}`}>
+                    <DropdownItem
+                      selectedTheme={selectedTheme}
+                      className={`"dropdown-item" ${selectedTheme === 'default' ? 'active' : ''}`}
+                      onClick={updateTheme}>
                       Default
-                    </div>
-                    <div
-                      className="dropdown-item"
-                      onClick={updateTheme}
-                      style={{ color: selectedTheme === 'default' ? '#262626' : '#3ba30d' }}>
+                    </DropdownItem>
+                    <DropdownItem
+                      selectedTheme={selectedTheme}
+                      className={`"dropdown-item" ${selectedTheme === 'alt' ? 'active' : ''}`}
+                      onClick={updateTheme}>
                       Dark
-                    </div>
-                  </div>
+                    </DropdownItem>
+                  </Dropdown>
                 </div>
               </li>
             </ul>

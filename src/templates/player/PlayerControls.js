@@ -10,6 +10,14 @@ const PlayerControls = styled.div`
   	flex: 1;
   	text-align: left;
 
+    &:first-child {
+      max-width: 30%;
+
+      @media (max-width: 768px) {
+        max-width: 100%;
+      }
+    }
+
   	&:last-child {
   		flex-wrap: wrap;
   		align-items: center;

@@ -2,6 +2,8 @@ import React, { useContext, useState, Fragment } from 'react'
 import { Store } from '../store'
 import Playback from '../utils/player'
 
+import { Dropdown, DropdownItem } from '../templates/index'
+
 import loadingSvg from '../assets/svg/loading.svg'
 import barsSvg from '../assets/svg/bars.svg'
 import playAltSvg from '../assets/svg/play.alt.svg'
@@ -64,11 +66,15 @@ const Songs = (props) => {
             alt="Toggle playlist songs"
             style={playlistToggleStyles()} />
         </button>
-        <div id="selectedPlaylistSongs" className={`dropdown-menu ${playlistSongs ? 'show' : ''}`}>
+        <Dropdown
+          selectedTheme={selectedTheme}
+          id="selectedPlaylistSongs"
+          className={`dropdown-menu show ${playlistSongs ? 'show' : ''}`}>
           {selectedPlaylist && selectedPlaylist.map((song, index) => {
             return (
-              <div
+              <DropdownItem
                 key={index}
+                selectedTheme={selectedTheme}
                 className="dropdown-item">
                 <p style={playlistSongStyles(song)}>
                   {!playerReady &&
@@ -87,14 +93,14 @@ const Songs = (props) => {
                   {song.title}
                 </p>
                 <p style={playlistSongOptionStyle(song)}>
-                  <span style={{ minWidth: '15px' }}>
+                  <span style={{ minWidth: '25px' }}>
                     <img
                       src={playlistQueue.length > 0 && playlistQueue.find(playlistSong => playlistSong.source === song.source) ? minusSvg  : addSvg}
                       alt="Add song to queue"
                       style={playlistSongOptionControlStyle()}
                       onClick={() => playerQueue(song)} />
                   </span>
-                  <span style={{ minWidth: '15px' }}>
+                  <span style={{ minWidth: '25px' }}>
                     <img
                       src={ (songRepeat && songIndex === index) ? repeatAltSvg : repeatSvg }
                       alt="Repeat song"
@@ -106,10 +112,10 @@ const Songs = (props) => {
                 <small style={{ marginLeft: '20px', color: JSON.stringify(songPlaying) === JSON.stringify(song) ? '#3ba30d' : '#262626' }}>
                   {song.artist}
                 </small>
-              </div>
+              </DropdownItem>
             )
           })}
-        </div>
+        </Dropdown>
       </div>
   	</Fragment>
 	)
