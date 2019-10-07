@@ -8,6 +8,7 @@ const initialState = {
   shufflePlaylist: false,
   shuffledPlaylist: [],
   playerReady: true,
+  songIndex: null,
   songPlaying: null,
   songPlayingProgress: 0,
   songRepeat: false,
@@ -26,6 +27,8 @@ function reducer(state, action) {
       return { ...state, shuffledPlaylist: action.payload }
     case "PLAYER_READY":
       return { ...state, playerReady: action.payload }
+    case "SONG_INDEX":
+      return { ...state, songIndex: action.payload }
     case "SONG_PLAYING":
       return { ...state, songPlaying: action.payload }
     case "SONG_PLAYING_PROGRESS":

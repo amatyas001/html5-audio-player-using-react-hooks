@@ -20,7 +20,7 @@ const Controls = (props) => {
   const player = document.getElementById("audioPlayer")
   const { state } = useContext(Store)
   const { selectedPlaylist, shufflePlaylist, playerReady, songPlaying } = state
-  const { playerShuffle, playerPlaySong, playerMuteVolume } = Playback()
+  const { playerPlaySong, playerGoToSong, playerMuteVolume, playerShuffle } = Playback()
 
   const controlButtonSyles = (isPlay) => {
     return {
@@ -34,7 +34,10 @@ const Controls = (props) => {
         <div className="item">
           <Songs />
 
-          <button type="button" className="btn">
+          <button
+            type="button"
+            className="btn"
+            onClick={() => playerGoToSong()}>
             <img
               src={prevSvg}
               alt="Previous song"
@@ -87,7 +90,10 @@ const Controls = (props) => {
             )
           })}
 
-          <button type="button" className="btn">
+          <button
+            type="button"
+            className="btn"
+            onClick={() => playerGoToSong('next')}>
             <img
               src={nextSvg}
               alt="Next song"

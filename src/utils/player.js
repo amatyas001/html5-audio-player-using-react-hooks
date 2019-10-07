@@ -8,7 +8,7 @@ export default function Playback (props) {
 	const { dispatch, state } = useContext(Store)
 	const {
     selectedPlaylist, shufflePlaylist, shuffledPlaylist,
-    songIndex, songPlaying, playerRepeatSong, playerMute } = state
+    songIndex, songPlaying, playerRepeatSong } = state
 
   const playerPlaylist = async () => {
     const data = await fetch("http://localhost:3004/posts")
@@ -42,6 +42,11 @@ export default function Playback (props) {
         player.play()
     	}
     } else {
+      dispatch({
+        type: "SONG_INDEX",
+        payload: index
+      })
+
       dispatch({
         type: "SONG_PLAYING",
         payload: song
@@ -91,11 +96,31 @@ export default function Playback (props) {
         const nextSong = shuffledPlaylist[0]
 
         dispatch({
+          type: "PLAYER_READY",
+          payload: false
+        })
+
+        dispatch({
+          type: "SONG_INDEX",
+          payload: 0
+        })
+
+        dispatch({
           type: "SONG_PLAYING",
           payload: nextSong
         })
       } else {
-        const nextSong = shuffledPlaylist[newIndex];
+        const nextSong = shuffledPlaylist[newIndex]
+
+        dispatch({
+          type: "PLAYER_READY",
+          payload: false
+        })
+
+        dispatch({
+          type: "SONG_INDEX",
+          payload: newIndex
+        })
 
         dispatch({
           type: "SONG_PLAYING",
@@ -106,7 +131,17 @@ export default function Playback (props) {
       const newIndex = direction === 'next' ? songIndex + 1 : songIndex - 1
 
       if (newIndex === selectedPlaylist.length) {
-        const nextSong = selectedPlaylist[0];
+        const nextSong = selectedPlaylist[0]
+
+        dispatch({
+          type: "PLAYER_READY",
+          payload: false
+        })
+
+        dispatch({
+          type: "SONG_INDEX",
+          payload: 0
+        })
 
         return dispatch({
           type: "SONG_PLAYING",
@@ -116,6 +151,16 @@ export default function Playback (props) {
         const nextSong = selectedPlaylist[newIndex]
 
         if (nextSong) {
+          dispatch({
+            type: "PLAYER_READY",
+            payload: false
+          })
+
+          dispatch({
+            type: "SONG_INDEX",
+            payload: newIndex
+          })
+
           dispatch({
             type: "SONG_PLAYING",
             payload: nextSong
@@ -133,11 +178,11 @@ export default function Playback (props) {
   }
 
   const playerMuteVolume = () => {
-    player.muted = !playerMute
+    player.muted = !player.muted
 
     return dispatch({
       type: "SONG_MUTE",
-      payload: !playerMute
+      payload: player.muted
     })
   }
 
