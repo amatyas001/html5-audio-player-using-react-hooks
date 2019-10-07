@@ -7,6 +7,7 @@ import barsSvg from '../assets/svg/bars.svg'
 import playAltSvg from '../assets/svg/play.alt.svg'
 import pauseAltSvg from '../assets/svg/pause.alt.svg'
 import addSvg from '../assets/svg/add.svg'
+import minusSvg from '../assets/svg/minus.svg'
 import repeatSvg from '../assets/svg/repeat.svg'
 import repeatAltSvg from '../assets/svg/repeat.alt.svg'
 
@@ -14,8 +15,8 @@ const Songs = (props) => {
   const player = document.getElementById("audioPlayer")
   const { state } = useContext(Store)
   const [ playlistSongs, playlistSongsToggle ] = useState(false)
-  const { selectedPlaylist, playerReady, songIndex, songPlaying, songRepeat } = state
-  const { playerPlaySong, playerRepeat } = Playback()
+  const { selectedPlaylist, playerReady, songIndex, songPlaying, songRepeat, playlistQueue } = state
+  const { playerPlaySong, playerRepeat, playerQueue } = Playback()
 
   const playlistToggleStyles = () => {
     return {
@@ -85,15 +86,20 @@ const Songs = (props) => {
                   {song.title}
                 </p>
                 <p style={playlistSongOptionStyle(song)}>
-                  <img
-                    src={addSvg}
-                    alt="Add song to queue"
-                    style={playlistSongOptionControlStyle()} /> 
-                  <img
-                    src={ (songRepeat && songIndex === index) ? repeatAltSvg : repeatSvg }
-                    alt="Repeat song"
-                    onClick={() => playerRepeat(index)}
-                    style={playlistSongOptionControlStyle(true)} /> 
+                  <span style={{ minWidth: '15px' }}>
+                    <img
+                      src={playlistQueue.length > 0 && playlistQueue.find(playlistSong => playlistSong.source === song.source) ? minusSvg  : addSvg}
+                      alt="Add song to queue"
+                      style={playlistSongOptionControlStyle()}
+                      onClick={() => playerQueue(song)} />
+                  </span>
+                  <span style={{ minWidth: '15px' }}>
+                    <img
+                      src={ (songRepeat && songIndex === index) ? repeatAltSvg : repeatSvg }
+                      alt="Repeat song"
+                      onClick={() => playerRepeat(index)}
+                      style={playlistSongOptionControlStyle(true)} />
+                  </span>
                   {song.duration}
                 </p>
                 <small style={{ marginLeft: '20px', color: JSON.stringify(songPlaying) === JSON.stringify(song) ? '#3ba30d' : '#262626' }}>

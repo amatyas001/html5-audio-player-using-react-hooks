@@ -8,7 +8,7 @@ export default function Playback (props) {
 	const { dispatch, state } = useContext(Store)
 	const {
     selectedPlaylist, shufflePlaylist, shuffledPlaylist,
-    songIndex, songPlaying, songRepeat } = state
+    playlistQueue, songIndex, songPlaying, songRepeat } = state
 
   const playerPlaylist = async () => {
     const data = await fetch("http://localhost:3004/posts")
@@ -32,6 +32,39 @@ export default function Playback (props) {
       type: "SHUFFLED_PLAYLIST",
       payload: shuffledPlaylist
     })
+  }
+
+  const playerQueue = (song) => {
+    if (playlistQueue.length > 0) {
+      const songInQueue = playlistQueue.find(playlistSong => playlistSong.source === song.source)
+
+      if (songInQueue) {
+        const index = playlistQueue.indexOf(song)
+        const newPlaylistQueue = playlistQueue.slice()
+              newPlaylistQueue.splice(index)
+
+        return dispatch({
+          type: "PLAYLIST_QUEUE",
+          payload: newPlaylistQueue
+        })
+      } else {
+        const newPlaylistQueue = playlistQueue.slice()
+            newPlaylistQueue.push(song)
+
+        return dispatch({
+          type: "PLAYLIST_QUEUE",
+          payload: newPlaylistQueue
+        })
+      }
+    } else {
+      const newPlaylistQueue = []
+            newPlaylistQueue.push(song)
+
+      return dispatch({
+        type: "PLAYLIST_QUEUE",
+        payload: newPlaylistQueue
+      })
+    }
   }
 
   const playerPlaySong = (song, index) => {
@@ -198,6 +231,7 @@ export default function Playback (props) {
 	return {
     playerPlaylist,
     playerShuffle,
+    playerQueue,
 		playerPlaySong,
 		playerReadyToPlay,
 		playerSongProgress,

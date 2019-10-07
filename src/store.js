@@ -12,7 +12,8 @@ const initialState = {
   songPlaying: null,
   songPlayingProgress: 0,
   songRepeat: false,
-  songMute: false
+  songMute: false,
+  playlistQueue: []
 }
 
 function reducer(state, action) {
@@ -37,6 +38,8 @@ function reducer(state, action) {
       return { ...state, songRepeat: action.payload }
     case "SONG_MUTE":
       return { ...state, songMute: action.payload }
+    case "PLAYLIST_QUEUE":
+      return { ...state, playlistQueue: action.payload }
     default:
       return state;
   }
