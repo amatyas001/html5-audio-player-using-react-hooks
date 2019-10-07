@@ -21,5 +21,22 @@ const PlayerControls = styled.div`
   		}
   	}
   }
+
+  @media (max-width: 414px) {
+    flex-wrap: wrap;
+
+    .item {
+      min-width: 100%;
+      align-items: center;
+      justify-content: center;
+
+      &:last-child {
+
+        p, small {
+          text-align: center;
+        }
+      }
+    }
+  }
 `
 export default PlayerControls

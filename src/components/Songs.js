@@ -63,7 +63,7 @@ const Songs = (props) => {
             alt="Toggle playlist songs"
             style={playlistToggleStyles()} />
         </button>
-        <div id="selectedPlaylistSongs" className={`dropdown-menu show ${playlistSongs ? 'show' : ''}`}>
+        <div id="selectedPlaylistSongs" className={`dropdown-menu ${playlistSongs ? 'show' : ''}`}>
           {selectedPlaylist && selectedPlaylist.map((song, index) => {
             return (
               <div
