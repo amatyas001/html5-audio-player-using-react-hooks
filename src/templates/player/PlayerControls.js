@@ -15,6 +15,7 @@ const PlayerControls = styled.div`
   		align-items: center;
 
   		p, small {
+        color: ${(props) => props.selectedTheme === 'default' ? '#262626;' : '#ffffff;'}
   			text-align: left;
   			width: 100%;
   			margin: 0;
@@ -22,7 +23,7 @@ const PlayerControls = styled.div`
   	}
   }
 
-  @media (max-width: 414px) {
+  @media (max-width: 768px) {
     flex-wrap: wrap;
 
     .item {

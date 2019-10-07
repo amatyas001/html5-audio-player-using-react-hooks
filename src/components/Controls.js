@@ -19,18 +19,19 @@ import shuffleAltSvg from '../assets/svg/shuffle.alt.svg'
 const Controls = (props) => {
   const player = document.getElementById("audioPlayer")
   const { state } = useContext(Store)
-  const { selectedPlaylist, shufflePlaylist, playerReady, songPlaying } = state
+  const { selectedTheme, selectedPlaylist, shufflePlaylist, playerReady, songPlaying } = state
   const { playerPlaySong, playerGoToSong, playerMuteVolume, playerShuffle } = Playback()
 
   const controlButtonSyles = (isPlay) => {
     return {
-      width: isPlay ? '50px' : '15px'
+      width: isPlay ? '50px' : '15px',
+      filter: selectedTheme === 'default' ? 'invert(1)' : 'invert(0)'
     }
   }
 
 	return (
   	<Fragment>
-      <PlayerControls>
+      <PlayerControls selectedTheme={selectedTheme}>
         <div className="item">
           <Songs />
 

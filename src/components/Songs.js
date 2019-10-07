@@ -15,12 +15,13 @@ const Songs = (props) => {
   const player = document.getElementById("audioPlayer")
   const { state } = useContext(Store)
   const [ playlistSongs, playlistSongsToggle ] = useState(false)
-  const { selectedPlaylist, playerReady, songIndex, songPlaying, songRepeat, playlistQueue } = state
+  const { selectedTheme, selectedPlaylist, playerReady, songIndex, songPlaying, songRepeat, playlistQueue } = state
   const { playerPlaySong, playerRepeat, playerQueue } = Playback()
 
   const playlistToggleStyles = () => {
     return {
-      width: '15px'
+      width: '15px',
+      filter: selectedTheme === 'default' ? 'invert(1)' : 'invert(0)'
     }
   }
 

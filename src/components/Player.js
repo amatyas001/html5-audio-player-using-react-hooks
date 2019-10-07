@@ -10,7 +10,7 @@ import Controls from './Controls'
 const Player = (props) => {
   const player = document.getElementById("audioPlayer")
 	const { state } = useContext(Store)
-  const { songPlaying } = state
+  const { selectedTheme, songPlaying } = state
   const { playerPlaylist, playerReadyToPlay, playerSongProgress, playerSongEnded } = Playback()
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const Player = (props) => {
           <source src={songPlaying && songPlaying.source} type="audio/mpeg" />
       </audio>
 
-      <PlayerContainer>
+      <PlayerContainer selectedTheme={selectedTheme}>
         <Progress />
         <Controls />
       </PlayerContainer>
