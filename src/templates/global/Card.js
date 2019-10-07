@@ -2,16 +2,16 @@ import styled from '@xstyled/styled-components'
 
 const Card = styled.div`
   background-color: ${(props) => props.selectedTheme === 'default' ? '#ffffff;' : '#6A6A6A;'}
-	border-radius: defaultRadius;
+	border-radius: .25rem;
   border: none !important;
   text-align: center;
   margin: 0 0 15px 0;
 
   .card-body {
-    background-color: secondaryColor;
+    background-color: ${(props) => props.selectedTheme === 'default' ? '#ffffff;' : '#6A6A6A;'}
     position: relative;
-    color: textColor;
-    border-radius: defaultRadius;
+    color: ${(props) => props.selectedTheme === 'default' ? '#262626;' : '#ffffff;'}
+    border-radius: .25rem;
     transition: all 0.3s;
     min-height: 275px;
 
@@ -24,46 +24,13 @@ const Card = styled.div`
     }
 
     pre {
-    	background-color: backgroundColor;
-    	padding: defaultPadding;
-    	color: textColor;
+    	background-color: ${(props) => props.selectedTheme === 'default' ? '#dedede;' : '#262626;'}
+    	color: ${(props) => props.selectedTheme === 'default' ? '#262626;' : '#ffffff;'}
       padding: 15px;
     }
 
     button {
       margin: 5px 0;
-    }
-
-    // i, svg {
-    //   position: absolute;
-    //   top: 15px;
-    //   right: 15px;
-    //   cursor: pointer;
-    //   transition: all 0.3s;
-
-    //   &:hover {
-    //     color: primaryColor;
-    //   }
-    // }
-
-    i.active,
-    svg.active {
-      color: primaryColor;
-    }
-
-    .post-comments {
-      text-align: center;
-      padding: 15px;
-      border-bottom: 1px solid #dedede;
-
-      &:last-child {
-        border: none;
-        padding: 15px 15px 0 15px;
-      }
-
-      p {
-        text-align: center;
-      }
     }
   }
 `

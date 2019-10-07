@@ -6,49 +6,22 @@ const Header = styled.div`
   margin: 15px 0;
 
   h1 {
-  	color: textColor;
+  	color: ${(props) => props.selectedTheme === 'default' ? '#262626;' : '#ffffff;'}
 
     a {
-      color: textColor;
+      color: ${(props) => props.selectedTheme === 'default' ? '#262626;' : '#ffffff;'}
 
       &:hover {
-        color: primaryColor;
-      }
-    }
-  }
-
-  // i, svg {
-  //   position: absolute;
-  //   top: 15px;
-  //   right: 15px;
-  //   cursor: pointer;
-  //   transition: all 0.3s;
-
-  //   &:hover {
-  //     color: primaryColor;
-  //   }
-  // }
-
-  i.active,
-  svg.active {
-    color: primaryColor;
-  }
-
-  .nav {
-    .nav-item {
-      .nav-link {
-        i, svg {
-          position: relative;
-          top: 0;
-          right: 0;
-        }
+        color: #3ba30d;
       }
     }
   }
 
   .card {
+
     .card-body {
       min-height: 1px;
+
       p {
         text-align: center;
       }
