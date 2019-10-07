@@ -1,7 +1,7 @@
 import styled from '@xstyled/styled-components'
 
 const Card = styled.div`
-  background-color: secondaryColor !important;
+  background-color: ${(props) => props.selectedTheme === 'default' ? '#ffffff;' : '#6A6A6A;'}
 	border-radius: defaultRadius;
   border: none !important;
   text-align: center;

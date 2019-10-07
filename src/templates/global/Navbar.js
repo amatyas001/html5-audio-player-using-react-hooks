@@ -9,6 +9,16 @@ const Navbar = styled.div`
 		left: 0;
 		padding: 0 15px;
 		z-index: 9999;
+
+		.dropdown-toggle {
+			color: ${(props) => props.selectedTheme === 'default' ? '#262626;' : '#3ba30d;'}
+			margin: 10px 5px;
+		}
+
+		.dropdown-menu {
+			min-width: 1px;
+			left: -30px;
+		}
   }
 `
 export default Navbar
