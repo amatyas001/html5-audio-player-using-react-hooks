@@ -204,6 +204,8 @@ export default function Playback (props) {
   }
 
   const playerRepeat = (index) => {
+    player.loop = !player.loop
+
     dispatch({
       type: "SONG_INDEX",
       payload: index
@@ -211,7 +213,7 @@ export default function Playback (props) {
 
     return dispatch({
       type: "SONG_REPEAT",
-      payload: !songRepeat
+      payload: player.loop
     })
   }
 
@@ -225,7 +227,61 @@ export default function Playback (props) {
   }
 
   const playerSongEnded = () => {
+    if (!songRepeat) {
+      return dispatch({
+        type: "CLEAR_SONG_PLAYING"
+      })
+    } else if (shufflePlaylist) {
+      const newIndex = songIndex + 1
       
+      if (newIndex === shuffledPlaylist.length) {
+        const nextSong = shuffledPlaylist[0]
+        dispatch({
+          type: "PLAYER_READY",
+          payload: false
+        })
+
+        dispatch({
+          type: "SONG_INDEX",
+          payload: 0
+        })
+
+        return dispatch({
+          type: "SONG_PLAYING",
+          payload: nextSong
+        })
+      } else {
+        const nextSong = shuffledPlaylist[newIndex]
+        dispatch({
+          type: "PLAYER_READY",
+          payload: false
+        })
+
+        dispatch({
+          type: "SONG_INDEX",
+          payload: newIndex
+        })
+
+        dispatch({
+          type: "SONG_PLAYING",
+          payload: nextSong
+        })
+      }
+    } else if (playlistQueue.length > 0) {
+      let newIndex = playlistQueue.length - 1
+          newIndex = newIndex + 1
+
+      const nextSong = playlistQueue[newIndex]
+      dispatch({
+        type: "PLAYER_READY",
+        payload: false
+      })
+      
+      dispatch({
+        type: "SONG_PLAYING",
+        payload: nextSong
+      })
+    }
   }
 
 	return {

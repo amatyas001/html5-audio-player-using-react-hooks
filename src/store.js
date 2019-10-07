@@ -32,6 +32,8 @@ function reducer(state, action) {
       return { ...state, songIndex: action.payload }
     case "SONG_PLAYING":
       return { ...state, songPlaying: action.payload }
+    case "CLEAR_SONG_PLAYING":
+      return { ...state, songPlaying: initialState.songPlaying }
     case "SONG_PLAYING_PROGRESS":
       return { ...state, songPlayingProgress: action.payload }
     case "SONG_REPEAT":
