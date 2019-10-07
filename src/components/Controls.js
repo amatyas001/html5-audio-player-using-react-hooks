@@ -14,12 +14,13 @@ import nextSvg from '../assets/svg/next.svg'
 import volumeSvg from '../assets/svg/volume.svg'
 import muteSvg from '../assets/svg/mute.svg'
 import shuffleSvg from '../assets/svg/shuffle.svg'
+import shuffleAltSvg from '../assets/svg/shuffle.alt.svg'
 
 const Controls = (props) => {
   const player = document.getElementById("audioPlayer")
   const { state } = useContext(Store)
-  const { selectedPlaylist, playerReady, songPlaying } = state
-  const { playerPlaySong } = Playback()
+  const { selectedPlaylist, shufflePlaylist, playerReady, songPlaying } = state
+  const { playerShuffle, playerPlaySong, playerMuteVolume } = Playback()
 
   const controlButtonSyles = (isPlay) => {
     return {
@@ -92,17 +93,23 @@ const Controls = (props) => {
               alt="Next song"
               style={controlButtonSyles()} />
           </button>
+
           <button
             type="button"
-            className="btn">
+            className="btn"
+            onClick={() => playerMuteVolume()}>
             <img
               src={ player && player.muted ? muteSvg : volumeSvg }
               alt={ player && player.muted ? "Mute volume" : "Unmute volume" }
               style={controlButtonSyles()} />
           </button>
-          <button type="button" className="btn">
+
+          <button
+            type="button"
+            className="btn"
+            onClick={() => playerShuffle()}>
             <img
-              src={shuffleSvg}
+              src={ shufflePlaylist ? shuffleAltSvg : shuffleSvg}
               alt="Shuffle songs"
               style={controlButtonSyles()} />
           </button>

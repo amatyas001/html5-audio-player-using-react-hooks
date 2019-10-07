@@ -5,6 +5,8 @@ export const Store = React.createContext()
 const initialState = {
   selectedTheme: 'default',
   selectedPlaylist: [],
+  shufflePlaylist: false,
+  shuffledPlaylist: [],
   playerReady: true,
   songPlaying: null,
   songPlayingProgress: 0,
@@ -18,6 +20,10 @@ function reducer(state, action) {
       return { ...state, selectedTheme: action.payload }
     case "SELECTED_PLAYLIST":
       return { ...state, selectedPlaylist: action.payload }
+    case "SHUFFLE_PLAYLIST":
+      return { ...state, shufflePlaylist: action.payload }
+    case "SHUFFLED_PLAYLIST":
+      return { ...state, shuffledPlaylist: action.payload }
     case "PLAYER_READY":
       return { ...state, playerReady: action.payload }
     case "SONG_PLAYING":
