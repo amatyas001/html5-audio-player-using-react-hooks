@@ -8,13 +8,14 @@ import playAltSvg from '../assets/svg/play.alt.svg'
 import pauseAltSvg from '../assets/svg/pause.alt.svg'
 import addSvg from '../assets/svg/add.svg'
 import repeatSvg from '../assets/svg/repeat.svg'
+import repeatAltSvg from '../assets/svg/repeat.alt.svg'
 
 const Songs = (props) => {
   const player = document.getElementById("audioPlayer")
   const { state } = useContext(Store)
   const [ playlistSongs, playlistSongsToggle ] = useState(false)
-  const { selectedPlaylist, playerReady, songPlaying } = state
-  const { playerPlaySong } = Playback()
+  const { selectedPlaylist, playerReady, songIndex, songPlaying, songRepeat } = state
+  const { playerPlaySong, playerRepeat } = Playback()
 
   const playlistToggleStyles = () => {
     return {
@@ -66,8 +67,7 @@ const Songs = (props) => {
             return (
               <div
                 key={index}
-                className="dropdown-item"
-                onClick={() => playerPlaySong(song, index)}>
+                className="dropdown-item">
                 <p style={playlistSongStyles(song)}>
                   {!playerReady &&
                     <img
@@ -79,7 +79,8 @@ const Songs = (props) => {
                     <img
                       src={ player && player.paused ? playAltSvg : JSON.stringify(songPlaying) === JSON.stringify(song) ? pauseAltSvg : playAltSvg }
                       alt={ player && player.paused ? "Play song" : "Pause song" }
-                      style={{ width: '10px', marginRight: '10px' }} />
+                      style={{ width: '10px', marginRight: '10px' }}
+                      onClick={() => playerPlaySong(song, index)} />
                   }
                   {song.title}
                 </p>
@@ -89,8 +90,9 @@ const Songs = (props) => {
                     alt="Add song to queue"
                     style={playlistSongOptionControlStyle()} /> 
                   <img
-                    src={repeatSvg}
+                    src={ (songRepeat && songIndex === index) ? repeatAltSvg : repeatSvg }
                     alt="Repeat song"
+                    onClick={() => playerRepeat(index)}
                     style={playlistSongOptionControlStyle(true)} /> 
                   {song.duration}
                 </p>

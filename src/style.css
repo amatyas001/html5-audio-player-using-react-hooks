@@ -53,6 +53,12 @@ a:hover, a:focus {
 
 }
 
+.dropdown-item:active {
+
+	background: none;
+
+}
+
 .dropdown-item p {
 
 	flex: 1;

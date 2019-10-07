@@ -8,7 +8,7 @@ export default function Playback (props) {
 	const { dispatch, state } = useContext(Store)
 	const {
     selectedPlaylist, shufflePlaylist, shuffledPlaylist,
-    songIndex, songPlaying, playerRepeatSong } = state
+    songIndex, songPlaying, songRepeat } = state
 
   const playerPlaylist = async () => {
     const data = await fetch("http://localhost:3004/posts")
@@ -170,10 +170,15 @@ export default function Playback (props) {
     }
   }
 
-  const playerRepeat = (song, index) => {
+  const playerRepeat = (index) => {
+    dispatch({
+      type: "SONG_INDEX",
+      payload: index
+    })
+
     return dispatch({
       type: "SONG_REPEAT",
-      payload: !playerRepeatSong
+      payload: !songRepeat
     })
   }
 
