@@ -35,8 +35,8 @@ const Songs = (props) => {
 
   const playlistSongOptionStyle = (song) => {
     return {
-      display: 'flex',
-      justifyContent: 'flex-end',
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr 1fr',
       color: JSON.stringify(songPlaying) === JSON.stringify(song) ? '#3ba30d' : '#262626'
     }
   }
@@ -44,6 +44,7 @@ const Songs = (props) => {
   const playlistSongOptionControlStyle = (isRepeat) => {
     return {
       width: isRepeat ? '13px' : '10px',
+      filter: selectedTheme === 'default' ? 'invert(1)' : 'invert(0)',
       marginRight: '10px',
       cursor: 'pointer'
     }
@@ -87,27 +88,29 @@ const Songs = (props) => {
                     <img
                       src={ player && player.paused ? playAltSvg : JSON.stringify(songPlaying) === JSON.stringify(song) ? pauseAltSvg : playAltSvg }
                       alt={ player && player.paused ? "Play song" : "Pause song" }
-                      style={{ width: '10px', marginRight: '10px' }}
+                      style={{ width: '10px', marginRight: '10px', filter: selectedTheme === 'default' ? 'invert(1)' : 'invert(0)' }}
                       onClick={() => playerPlaySong(song, index)} />
                   }
                   {song.title}
                 </p>
                 <p style={playlistSongOptionStyle(song)}>
-                  <span style={{ minWidth: '25px' }}>
+                  <span>
                     <img
                       src={playlistQueue.length > 0 && playlistQueue.find(playlistSong => playlistSong.source === song.source) ? minusSvg  : addSvg}
                       alt="Add song to queue"
                       style={playlistSongOptionControlStyle()}
                       onClick={() => playerQueue(song)} />
                   </span>
-                  <span style={{ minWidth: '25px' }}>
+                  <span>
                     <img
                       src={ (songRepeat && songIndex === index) ? repeatAltSvg : repeatSvg }
                       alt="Repeat song"
                       onClick={() => playerRepeat(index)}
                       style={playlistSongOptionControlStyle(true)} />
                   </span>
-                  {song.duration}
+                  <span>
+                    {song.duration}
+                  </span>
                 </p>
                 <small style={{ marginLeft: '20px', color: JSON.stringify(songPlaying) === JSON.stringify(song) ? '#3ba30d' : '#262626' }}>
                   {song.artist}
