@@ -8,7 +8,7 @@ const Dropdown = styled.div`
   	color: ${(props) => props.selectedTheme === 'default' ? '#3ba30d !important' : '#262626 !important;'};
 
   	&:hover {
-  		background-color: ${(props) => props.selectedTheme === 'default' ? '#dedede;' : 'transparent'}
+  		background-color: ${(props) => props.selectedTheme === 'default' ? '#dedede;' : 'transparent !important'}
   	}
   }
 `

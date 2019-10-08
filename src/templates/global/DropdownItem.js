@@ -9,11 +9,11 @@ const DropdownItem = styled.div`
 	color: ${(props) => props.selectedTheme === 'default' ? '#262626 !important;' : '#ffffff;'}
 
 	:active {
-		background: none;
+		background: none !important;
 	}
 
 	:hover {
-		background-color: ${(props) => props.selectedTheme === 'default' ? '#dedede;' : '#262626;'}
+		background-color: ${(props) => props.selectedTheme === 'default' ? '#dedede;' : '#262626 !important;'}
 	}
 
 	p {
@@ -28,10 +28,6 @@ const DropdownItem = styled.div`
 		min-width: 100%;
 		color: ${(props) => props.selectedTheme === 'default' ? '#262626 !important;' : '#ffffff !important;'}
 
-	}
-
-	p:nth-child(2) {
-		text-align: right !important;
 	}
 `
 export default DropdownItem

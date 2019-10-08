@@ -41,10 +41,20 @@ const Songs = (props) => {
     }
   }
 
-  const playlistSongOptionControlStyle = (isRepeat) => {
+  const playlistSongOptionControlStyle = (isRepeat, song, index) => {
+    let filter = selectedTheme === 'default' ? 'invert(1)' : 'invert(0)'
+
+    if (!isRepeat && playlistQueue.length > 0 && playlistQueue.find(playlistSong => playlistSong.source === song.source)) {
+      filter = 'none'
+    }
+
+    if (isRepeat && songRepeat && songIndex === index) {
+      filter = 'none'
+    }
+
     return {
       width: isRepeat ? '13px' : '10px',
-      filter: selectedTheme === 'default' ? 'invert(1)' : 'invert(0)',
+      filter: filter,
       marginRight: '10px',
       cursor: 'pointer'
     }
@@ -70,7 +80,7 @@ const Songs = (props) => {
         <Dropdown
           selectedTheme={selectedTheme}
           id="selectedPlaylistSongs"
-          className={`dropdown-menu show ${playlistSongs ? 'show' : ''}`}>
+          className={`dropdown-menu ${playlistSongs ? 'show' : ''}`}>
           {selectedPlaylist && selectedPlaylist.map((song, index) => {
             return (
               <DropdownItem
@@ -98,7 +108,7 @@ const Songs = (props) => {
                     <img
                       src={playlistQueue.length > 0 && playlistQueue.find(playlistSong => playlistSong.source === song.source) ? minusSvg  : addSvg}
                       alt="Add song to queue"
-                      style={playlistSongOptionControlStyle()}
+                      style={playlistSongOptionControlStyle(false, song, index)}
                       onClick={() => playerQueue(song)} />
                   </span>
                   <span>
@@ -106,7 +116,7 @@ const Songs = (props) => {
                       src={ (songRepeat && songIndex === index) ? repeatAltSvg : repeatSvg }
                       alt="Repeat song"
                       onClick={() => playerRepeat(index)}
-                      style={playlistSongOptionControlStyle(true)} />
+                      style={playlistSongOptionControlStyle(true, song, index)} />
                   </span>
                   <span>
                     {song.duration}
